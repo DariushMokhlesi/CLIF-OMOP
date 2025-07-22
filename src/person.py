@@ -1,4 +1,4 @@
-# src/tables/patient.py
+# src/person.py
 import numpy as np
 import pandas as pd
 import duckdb
