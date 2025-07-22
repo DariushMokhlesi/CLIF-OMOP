@@ -34,6 +34,7 @@ with open('config.json', 'r') as f:
 clif_parquet_dir = config["clif_parquet_dir"]
 file_path = Path(clif_parquet_dir) / "clif_patient.parquet"
 
+
 def rename_person():
     try:
         patient_df = pd.read_parquet(file_path)
