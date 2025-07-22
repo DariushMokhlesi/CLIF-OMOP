@@ -1,1 +1,18 @@
-
+{   "current_workspace": "default",
+    "clif_parquet_dir": "/Users/kianmokhlesi/Desktop/OneDrive_2_7-22-2025",
+    "default": {
+        "mimic_csv_dir": "",
+        "clif_parquet_dir": "/Users/kianmokhlesi/Desktop/OneDrive_2_7-22-2025"
+    },
+    "create_mimic_parquet_from_csv": 1,
+    "overwrite_existing_mimic_parquet": 0,
+    "clif_output_dir_name": "",
+    "omop_version": "5.4",
+    "clif_version": "2.0",
+    "omop_tables": {
+        "drug_exposure" : 1,
+        "measurement": 1,
+        "person": 1,
+        "visit_occurrence": 1
+    }
+}
