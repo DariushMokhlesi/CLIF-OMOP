@@ -11,7 +11,7 @@ from src.utils import construct_mapper_dict, load_mapping_csv, \
 
 setup_logging()
 
-PATIENT_COL_NAMES = [
+PERSON_COL_NAMES = [
     "person_id", 
   "gender_concept_id", 
   "year_of_birth",
