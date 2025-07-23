@@ -37,16 +37,16 @@ file_path = Path(clif_parquet_dir) / "clif_patient.parquet"
 
 def rename_person():
     try:
-        patint_df = pd.read_parquet(file_path)
+        patient_df = pd.read_parquet(file_path)
         patient_df = patient_df.rename(columns={'patient_id': 'person_id'})    
         patient_df = patient_df.rename(columns={'sex_cetegory': 'gender_concept_id'})        
         patient_df = patient_df.rename(columns={'birth_date': 'year_of_birth'})        
         patient_df = patient_df.rename(columns={'race_category': 'race_concept_id'})        
         patient_df = patient_df.rename(columns={'ethnicity_category': 'ethnicity_concept_id'})            
-
         print(patient_df.head())
     except Exception as e:
         print(f"Error processing file: {e}")
+
 def adding_columns_person():
     try:
         patient_df = pd.read_parquet(file_path)
@@ -54,7 +54,6 @@ def adding_columns_person():
         print(patient_df.head())
     except Exception as e:
         print(f"Error processing file: {e}")
-
 
 if __name__ == "__main__":
     rename_person()
