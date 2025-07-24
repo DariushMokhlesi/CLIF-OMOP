@@ -31,13 +31,24 @@ def rename_drug_exposure():
     except Exception as e:
         print(f"Error processing file: {e}")
 
-
-
-
 def adding_columns_drug_exposure():
     try:
         drug_df = pd.read_parquet(file_path)
-        drug_df = drug_df.assign(measurement_id=None, )
+        drug_df = drug_df.assign(drug_exposure_id=None, 
+        person_id=None, 
+        drug_exposure_start_date = None,
+        drug_exposure_end_date = None,
+        drug_exposure_end_datetime = None,
+        verbatim_end_date = None,
+        drug_type_concept_id=None,
+        stop_reason=None, 
+        refills=None, 
+        days_supply=None,
+        sig=None,
+        route_concept_id=None,
+        lot_number=None,
+        provider_id=None,
+        visit_detail_id=None)
         print(drug_df.head())
     except Exception as e:
         print(f"Error processing file: {e}")
