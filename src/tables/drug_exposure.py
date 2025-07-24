@@ -13,6 +13,7 @@ DRUG_EXPOSURE_COL_NAMES = [
 with open('config.json', 'r') as f:
     config = json.load(f)
 
+
 clif_parquet_dir = config["clif_parquet_dir"]
 file_path = Path(clif_parquet_dir) / "clif_medication_admin_continuous.parquet"
 
@@ -27,7 +28,12 @@ def rename_drug_exposure():
         drug_df = drug_df.rename(columns={'med_name': 'drug_source_value'})   
         drug_df = drug_df.rename(columns={'med_route_name': 'route_source_value'})   
         drug_df = drug_df.rename(columns={'med_dose_unit': 'dose_unit_source_value'})   
-        print(drug_df.head())
+        
+        df = pd.read_csv("MappingMedicationConceptID.csv")
+        df['med_category'] = df['med_category'].str.lower().str.strip()
+        mapping = dict(zip(df["med_category"], df["Concept ID"]))
+        drug_df["drug_concept_id"] = drug_df["drug_concept_id"].map(mapping)
+        print(drug_df["drug_concept_id"].unique())
     except Exception as e:
         print(f"Error processing file: {e}")
 
@@ -49,9 +55,10 @@ def adding_columns_drug_exposure():
         lot_number=None,
         provider_id=None,
         visit_detail_id=None)
-        print(drug_df.head())
     except Exception as e:
         print(f"Error processing file: {e}")
+
+
 
 if __name__ == "__main__":
     rename_drug_exposure()
