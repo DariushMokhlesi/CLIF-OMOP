@@ -31,6 +31,9 @@ def rename_drug_exposure():
     except Exception as e:
         print(f"Error processing file: {e}")
 
+
+
+
 def adding_columns_drug_exposure():
     try:
         drug_df = pd.read_parquet(file_path)
