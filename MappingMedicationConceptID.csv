@@ -1,0 +1,80 @@
+﻿med_category,med_group,Concept ID,Concept code,Domain ID,Concept Class ID,Vocabulary ID,Validity,Concept
+norepinephrine,vasoactives,1321341,7512,Drug,Ingredient,RxNorm,Valid,Standard
+epinephrine,vasoactives,1343916,3992,Drug,Ingredient,RxNorm,Valid,Standard
+phenylephrine,vasoactives,1135766,8163,Drug,Ingredient,RxNorm,Valid,Standard
+angiotensin,vasoactives,963889,1999003,Drug,Ingredient,RxNorm,Valid,Standard
+vasopressin,vasoactives,1507835,11149,Drug,Ingredient,RxNorm,Valid,Standard
+dopamine,vasoactives,1337860,3628,Drug,Ingredient,RxNorm,Valid,Standard
+dobutamine,vasoactives,1337720,3616,Drug,Ingredient,RxNorm,Valid,Standard
+milrinone,vasoactives,1368671,52769,Drug,Ingredient,RxNorm,Valid,Standard
+isoproterenol,vasoactives,1183554,6054,Drug,Ingredient,RxNorm,Valid,Standard
+propofol,sedation,753626,8782,Drug,Ingredient,RxNorm,Valid,Standard
+dexmedetomidine,sedation,19061088,48937,Drug,Ingredient,RxNorm,Valid,Standard
+ketamine,sedation,785649,6130,Drug,Ingredient,RxNorm,Valid,Standard
+midazolam,sedation,708298,6960,Drug,Ingredient,RxNorm,Valid,Standard
+fentanyl,sedation,1154029,4337,Drug,Ingredient,RxNorm,Valid,Standard
+hydromorphone,sedation,1126658,3423,Drug,Ingredient,RxNorm,Valid,Standard
+morphine,sedation,1110410,7052,Drug,Ingredient,RxNorm,Valid,Standard
+remifentanil,sedation,19016749,73032,Drug,Ingredient,RxNorm,Valid,Standard
+pentobarbital,sedation,730729,8004,Drug,Ingredient,RxNorm,Valid,Standard
+lorazepam,sedation,791967,6470,Drug,Ingredient,RxNorm,Valid,Standard
+furosemide,diuretics,956874,4603,Drug,Ingredient,RxNorm,Valid,Standard
+bumetanide,diuretics,932745,1808,Drug,Ingredient,RxNorm,Valid,Standard
+torsemide,diuretics,942350,38413,Drug,Ingredient,RxNorm,Valid,Standard
+heparin,anticoagulation,1367571,5224,Drug,Ingredient,RxNorm,Valid,Standard
+argatroban,anticoagulation,1322207,15202,Drug,Ingredient,RxNorm,Valid,Standard
+bivalirudin alteplase,anticoagulation,19084670,60819,Drug,Ingredient,RxNorm,Valid,Standard
+cangrelor,anticoagulation,46275677,1656052,Drug,Ingredient,RxNorm,Valid,Standard
+eptifibatide,anticoagulation,1322199,75635,Drug,Ingredient,RxNorm,Valid,Standard
+amiodarone,cardiac,1309944,703,Drug,Ingredient,RxNorm,Valid,Standard
+lidocaine,cardiac,989878,6387,Drug,Ingredient,RxNorm,Valid,Standard
+nicardipine,cardiac,1321341,7512,Drug,Ingredient,RxNorm,Valid,Standard
+clevidipine,cardiac,19089969,233603,Drug,Ingredient,RxNorm,Valid,Standard
+nitroglycerin,cardiac,1361711,4917,Drug,Ingredient,RxNorm,Valid,Standard
+nitroprusside,cardiac,19020994,7476,Drug,Ingredient,RxNorm,Valid,Standard
+esmolol,cardiac,19063575,49737,Drug,Ingredient,RxNorm,Valid,Standard
+diltiazem,cardiac,1328165,3443,Drug,Ingredient,RxNorm,Valid,Standard
+labetalol,cardiac,1386957,6185,Drug,Ingredient,RxNorm,Valid,Standard
+procainamide,cardiac,1351461,8700,Drug,Ingredient,RxNorm,Valid,Standard
+papaverine,cardiac,1326901,7895,Drug,Ingredient,RxNorm,Valid,Standard
+adenosine,cardiac,1309204,296,Drug,Ingredient,RxNorm,Valid,Standard
+cisatracurium,paralytics,19015726,319864,Drug,Ingredient,RxNorm,Valid,Standard
+vecuronium,paralytics,19012598,71535,Drug,Ingredient,RxNorm,Valid,Standard
+rocuronium,paralytics,19003953,68139,Drug,Ingredient,RxNorm,Valid,Standard
+treprostinil,pulmonary vasaldilators (IV),1327256,343048,Drug,Ingredient,RxNorm,Valid,Standard
+epoprostenol,pulmonary vasaldilators (IV),1354118,8814,Drug,Ingredient,RxNorm,Valid,Standard
+alprostadil,pulmonary vasaldilators (IV),1381504,598,Drug,Ingredient,RxNorm,Valid,Standard
+octreotide,gastrointestinal,1522957,7617,Drug,Ingredient,RxNorm,Valid,Standard
+pantoprazole,gastrointestinal,948078,40790,Drug,Ingredient,RxNorm,Valid,Standard
+esomeprazole,gastrointestinal,904453,283742,Drug,Ingredient,RxNorm,Valid,Standard
+albuterol,Inhaled,1154343,435,Drug,Ingredient,RxNorm,Valid,Standard
+terbutaline,Inhaled,1236744,10368,Drug,Ingredient,RxNorm,Valid,Standard
+ipratropium,Inhaled,1112921,7213,Drug,Ingredient,RxNorm,Valid,Standard
+narcan,analgesia,1114220,7242,Drug,Ingredient,RxNorm,Valid,Standard
+insulin,endocrine,45884660,LA15805-7,Meas Value,Answer,LOINC,Valid,Standard
+thyroid replacement,endocrine,1501700,10582,Drug,Ingredient,RxNorm,Valid,Standard
+oxytocin,endocrine,1326115,7824,Drug,Ingredient,RxNorm,Valid,Standard
+cosyntropin,endocrine,19008009,2890,Drug,Ingredient,RxNorm,Valid,Standard
+repletion,fluids_electrolytes,,,,,,,
+sodium bicarbonate,fluids_electrolytes,939506,36676,Drug,Ingredient,RxNorm,Valid,Standard
+tpn,fluids_electrolytes,,,,,,,
+tocolyttics,others,,,,,,,
+magnesium,others,19124906,6574,Drug,Ingredient,RxNorm,Valid,Standard
+pitocin,others,1326115,7824,Drug,Ingredient,RxNorm,Valid,Standard
+dextrose,others,,,,,,,
+sodium chloride,others,967823,9863,Drug,Ingredient,RxNorm,Valid,Standard
+aminocaproic,others,1369939,99,Drug,Ingredient,RxNorm,Valid,Standard
+aminophylline,others,1105775,689,Drug,Ingredient,RxNorm,Valid,Standard
+terbutaline,others,1236744,10368,Drug,Ingredient,RxNorm,Valid,Standard
+naloxone,others,1114220,7242,Drug,Ingredient,RxNorm,Valid,Standard
+phentolamine,others,1335539,8153,Drug,Ingredient,RxNorm,Valid,Standard
+liothyronine,others,1505346,10814,Drug,Ingredient,RxNorm,Valid,Standard
+zidovudine,others,1710612,11413,Drug,Ingredient,RxNorm,Valid,Standard
+tacrolimus,others,950637,42316,Drug,Ingredient,RxNorm,Valid,Standard
+ropivacaine,others,1136487,35780,Drug,Ingredient,RxNorm,Valid,Standard
+bupivacaine,others,732893,1815,Drug,Ingredient,RxNorm,Valid,Standard
+baclofen,others,715233,1292,Drug,Ingredient,RxNorm,Valid,Standard
+lactated_ringers_solution,fluids_electrolytes,,,,,,,
+albumin_infusion,fluids_electrolytes,,,,,,,
+plasma_lyte,fluids_electrolytes,,,,,,,
+dextrose_in_water_d5w,fluids_electrolytes,,,,,,,
