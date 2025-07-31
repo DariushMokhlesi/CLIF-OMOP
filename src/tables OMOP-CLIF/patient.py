@@ -33,9 +33,21 @@ def rename_patient():
         person_df = pd.read_parquet(file_path)
         person_df = person_df.rename(columns={'person_id': 'patient_id'})
         person_df = person_df.rename(columns={'gender_concept_id': 'sex_cetegory'})        
-        person_df = person_df.rename(columns={'year_of_birth': 'birth_date'})        
+        person_df = person_df.rename(columns={'birth_datetime': 'birth_date'})        
         person_df = person_df.rename(columns={'race_concept_id': 'race_category'})        
         person_df = person_df.rename(columns={'ethnicity_concept_id': 'ethnicity_category'})             
+        person_df = person_df.rename(columns={'gender_source_value': 'sex_name'})   
+        person_df = person_df.rename(columns={'race_source_value': 'race_name'})             
+        person_df = person_df.rename(columns={'ethnicity_source_value': 'ethnicity_name'})             
+
+        print(person_df.head())
+    except Exception as e:
+        print(f"Error processing file: {e}")
+
+def remove_columns_patient():
+    try:
+        person_df = pd.read_parquet(file_path)
+        person_df = person_df.drop(columns=['location_id', 'provider_id', 'care_site_id', 'person_source_value', 'gender_source_concept_id', 'race_source_concept_id', 'ethnicity_source_concept_id'])
         print(person_df.head())
     except Exception as e:
         print(f"Error processing file: {e}")
@@ -43,11 +55,12 @@ def rename_patient():
 def adding_columns_patient():
     try:
         person_df = pd.read_parquet(file_path)
-        person_df = person_df.assign(race_name=None, ethnicity_name=None, sex_name=None, death_dttm=None, language_name=None, language_category=None)
+        person_df = person_df.assign(death_dttm=None, language_name=None, language_category=None)
         print(person_df.head())
     except Exception as e:
         print(f"Error processing file: {e}")
 
 if __name__ == "__main__":
     rename_patient()
+    remove_columns_patient()
     adding_columns_patient()
