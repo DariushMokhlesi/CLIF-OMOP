@@ -1,9 +1,8 @@
 {   "current_workspace": "default",
     "clif_parquet_dir": "/Users/kianmokhlesi/Desktop/CLIF_MIMIC",
-    "omop_parquet_dir": "/Users/kianmokhlesi/Desktop/CLIF_MIMIC",
     "default": {
         "mimic_csv_dir": "",
-        "clif_parquet_dir": "/Users/kianmokhlesi/Desktop/CLIF_MIMIC"
+        "clif_parquet_dir": "/Users/dariushmokhlesi/Desktop/CLIF_MIMIC"
     },
     "create_mimic_parquet_from_csv": 1,
     "overwrite_existing_mimic_parquet": 0,
