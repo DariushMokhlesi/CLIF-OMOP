@@ -41,11 +41,11 @@ def rename_person():
         hospitalization_df = hospitalization_df.rename(columns={'hospitalization_id': 'visit_occurence_id'})       
         hospitalization_df = hospitalization_df.rename(columns={'patient_id': 'person_id'})       
         hospitalization_df = hospitalization_df.rename(columns={'admission_type_category': 'visit_concept_id'})       
-        hospitalization_df = hospitalization_df.rename(columns={'admission_dttm': 'visit_start_date'})       
+        #hospitalization_df = hospitalization_df.rename(columns={'admission_dttm': 'visit_start_date'})       
         hospitalization_df = hospitalization_df.rename(columns={'admission_dttm': 'visit_start_datetime'})       
-        hospitalization_df = hospitalization_df.rename(columns={'discharge_dttm': 'visit_end_date'})       
+        #hospitalization_df = hospitalization_df.rename(columns={'discharge_dttm': 'visit_end_date'})       
         hospitalization_df = hospitalization_df.rename(columns={'discharge_dttm': 'visit_end_datetime'})       
-        hospitalization_df = hospitalization_df.rename(columns={'admission_type_name': 'visit_source_value'})       
+        #hospitalization_df = hospitalization_df.rename(columns={'admission_type_name': 'visit_source_value'})       
         hospitalization_df = hospitalization_df.rename(columns={'admission_type_name': 'admitted_from_source_value'})       
         hospitalization_df = hospitalization_df.rename(columns={'discharge_category': 'discharged_to_concept_id'})       
         hospitalization_df = hospitalization_df.rename(columns={'discharge_name': 'discharged_to_source_value'})               
@@ -58,10 +58,20 @@ def adding_columns_hospital():
         hospitalization_df = hospitalization_df.assign(visit_type_concept_id=None, provider_id=None, care_site_id=None, visit_source_concept_id=None, admitted_from_concept_id=None, preceding_visit_occurence_id=None)
         print(hospitalization_df.head())
         hospitalization_df.to_parquet(output_file, index=False)
+
+    except Exception as e:
+        print(f"Error processing file: {e}")
+
+def remove_columns_hospital():
+    try:
+        hospitalization_df = pd.read_parquet(file_path)
+        hospitalization_df = hospitalization_df.drop(columns=['hospitalization_joined_id', 'zipcode_nine_digit', 'zipcode_five_digit' , 'census_block_code', 'census_block_group_code', 'census_tract', 'state_code', 'state_code', 'county_code', 'age_at_admission'])
+        print(hospitalization_df.head())
     except Exception as e:
         print(f"Error processing file: {e}")
 
 
 if __name__ == "__main__":
     rename_person()
+    remove_columns_hospital()
     adding_columns_hospital()
