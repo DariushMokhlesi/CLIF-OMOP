@@ -16,6 +16,7 @@ with open('config.json', 'r') as f:
 
 clif_parquet_dir = config["clif_parquet_dir"]
 file_path = Path(clif_parquet_dir) / "clif_medication_admin_continuous.parquet"
+output_file = Path(clif_parquet_dir) / "omop_drug_exposure.parquet"
 
 
 def rename_drug_exposure():
@@ -55,6 +56,7 @@ def adding_columns_drug_exposure():
         lot_number=None,
         provider_id=None,
         visit_detail_id=None)
+        drug_df.to_parquet(output_file, index=False)
     except Exception as e:
         print(f"Error processing file: {e}")
 

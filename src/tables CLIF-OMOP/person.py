@@ -33,6 +33,7 @@ with open('config.json', 'r') as f:
 
 clif_parquet_dir = config["clif_parquet_dir"]
 file_path = Path(clif_parquet_dir) / "clif_patient.parquet"
+output_file = Path(clif_parquet_dir) / "omop_person.parquet"
 
 
 def rename_person():
@@ -52,6 +53,7 @@ def adding_columns_person():
         patient_df = pd.read_parquet(file_path)
         patient_df = patient_df.assign(location_id=None, provider_id=None, care_site_id=None, person_source_value=None, gender_source_value=None, gender_source_concept_id=None, race_source_value=None, race_source_concept_id=None, ethnicity_source_value=None, ethnicity_source_concept_id=None)
         print(patient_df.head())
+        patient_df.to_parquet(output_file, index=False)
     except Exception as e:
         print(f"Error processing file: {e}")
 

@@ -38,6 +38,7 @@ with open('config.json', 'r') as f:
 
 clif_parquet_dir = config["clif_parquet_dir"]
 file_path = Path(clif_parquet_dir) / "clif_vitals.parquet"
+output_file = Path(clif_parquet_dir) / "measurement.parquet"
 
 
 def rename_measurement():
@@ -62,6 +63,7 @@ def adding_columns_measurement():
         vitals_df = pd.read_parquet(file_path)
         vitals_df = vitals_df.assign(measurement_id=None, person_id=None, measurement_type_concept_id=None, operator_concept_id=None, range_low=None, range_high=None, provider_id=None, visit_detail_id=None, measurement_source_concept_id=None, unit_source_value=None, unit_source_concept_id=None, value_source_value=None, measurement_event_id=None, meas_event_field_concept_id=None)
         print(vitals_df.head())
+        vitals_df.to_parquet(output_file, index=False)
     except Exception as e:
         print(f"Error processing file: {e}")
 
