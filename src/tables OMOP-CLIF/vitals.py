@@ -36,7 +36,7 @@ MEASUREMENT_COL_NAMES = [
 with open('config.json', 'r') as f:
     config = json.load(f)
 
-clif_parquet_dir = config["clif_parquet_dir"]
+clif_parquet_dir = config["omop_parquet_dir"]
 file_path = Path(clif_parquet_dir) / "clif_vitals.parquet"
 
 
