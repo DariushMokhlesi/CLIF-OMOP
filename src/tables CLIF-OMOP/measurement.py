@@ -38,7 +38,7 @@ with open('config.json', 'r') as f:
 
 clif_parquet_dir = config["clif_parquet_dir"]
 file_path = Path(clif_parquet_dir) / "clif_vitals.parquet"
-output_file = Path(clif_parquet_dir) / "measurement.parquet"
+output_file = Path(clif_parquet_dir) / "omop_measurement.parquet"
 
 
 def rename_measurement():
