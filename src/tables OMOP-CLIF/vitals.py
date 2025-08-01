@@ -37,8 +37,8 @@ with open('config.json', 'r') as f:
     config = json.load(f)
 
 omop_parquet_dir = config["omop_parquet_dir"]
-file_path = Path(omop_parquet_dir) / "clif_vitals.parquet"
-
+file_path = Path(omop_parquet_dir) / "omop_measurement.parquet"
+output_file = Path(omop_parquet_dir) / "clif_vitals.parquet"
 
 def rename_measurement():
     try:
