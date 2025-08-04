@@ -1,4 +1,4 @@
-# CLIF-OMOP
+# CLIF-OMOP and OMOP-CLIF
 This repository provides code that converts healthcare data from OMOP to CLIF and from CLIF to OMOP (bidirectional). It enables standardized data translation between the OMOP CDM and the CLIF longitudinal ICU format for analytical and research purposes.
 
 # Get Started
