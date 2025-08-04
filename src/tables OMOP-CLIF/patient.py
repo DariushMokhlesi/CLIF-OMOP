@@ -61,6 +61,7 @@ def adding_columns_patient():
         print(person_df.head())
         person_df.to_parquet(output_file, index=False)
 
+
     except Exception as e:
         print(f"Error processing file: {e}")
 
