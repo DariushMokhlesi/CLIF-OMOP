@@ -50,9 +50,9 @@ esomeprazole,gastrointestinal,904453,283742,Drug,Ingredient,RxNorm,Valid,Standar
 albuterol,Inhaled,1154343,435,Drug,Ingredient,RxNorm,Valid,Standard
 terbutaline,Inhaled,1236744,10368,Drug,Ingredient,RxNorm,Valid,Standard
 ipratropium,Inhaled,1112921,7213,Drug,Ingredient,RxNorm,Valid,Standard
-narcan,analgesia,1114220,7242,Drug,Ingredient,RxNorm,Valid,Standard
-insulin,endocrine,45884660,LA15805-7,Meas Value,Answer,LOINC,Valid,Standard
-thyroid replacement,endocrine,1501700,10582,Drug,Ingredient,RxNorm,Valid,Standard
+narcan,analgesia,42613612,OMOP5158689,Drug,Branded Drug Form,RxNorm Extension,Valid,Standard
+insulin,endocrine,,,,,,,
+thyroid replacement,endocrine,40175153,966293,Drug,Branded Drug,RxNorm,Valid,Standard
 oxytocin,endocrine,1326115,7824,Drug,Ingredient,RxNorm,Valid,Standard
 cosyntropin,endocrine,19008009,2890,Drug,Ingredient,RxNorm,Valid,Standard
 repletion,fluids_electrolytes,,,,,,,
@@ -61,7 +61,7 @@ tpn,fluids_electrolytes,,,,,,,
 tocolyttics,others,,,,,,,
 magnesium,others,19124906,6574,Drug,Ingredient,RxNorm,Valid,Standard
 pitocin,others,1326115,7824,Drug,Ingredient,RxNorm,Valid,Standard
-dextrose,others,,,,,,,
+dextrose,others,701658,2566843,Drug,Clinical Drug Comp,RxNorm,Valid,Standard
 sodium chloride,others,967823,9863,Drug,Ingredient,RxNorm,Valid,Standard
 aminocaproic,others,1369939,99,Drug,Ingredient,RxNorm,Valid,Standard
 aminophylline,others,1105775,689,Drug,Ingredient,RxNorm,Valid,Standard
@@ -74,7 +74,7 @@ tacrolimus,others,950637,42316,Drug,Ingredient,RxNorm,Valid,Standard
 ropivacaine,others,1136487,35780,Drug,Ingredient,RxNorm,Valid,Standard
 bupivacaine,others,732893,1815,Drug,Ingredient,RxNorm,Valid,Standard
 baclofen,others,715233,1292,Drug,Ingredient,RxNorm,Valid,Standard
-lactated_ringers_solution,fluids_electrolytes,,,,,,,
-albumin_infusion,fluids_electrolytes,,,,,,,
-plasma_lyte,fluids_electrolytes,,,,,,,
+lactated_ringers_solution,fluids_electrolytes,1593604,1866559,Drug,Clinical Drug,RxNorm,Valid,Standard
+albumin_infusion,fluids_electrolytes,35605720,1741300,Drug,Branded Drug Form,RxNorm,Valid,Standard
+plasma_lyte,fluids_electrolytes,21050327,OMOP365658,Drug,Branded Drug Form,RxNorm,Valid,Standard
 dextrose_in_water_d5w,fluids_electrolytes,,,,,,,
