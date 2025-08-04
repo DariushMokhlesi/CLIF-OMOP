@@ -5,24 +5,24 @@ from importlib import reload
 from pathlib import Path
 import json
 
-VISIT_OCCURRENCE_COL_NAMES = [
-"visit_occurence_id",
-"person_id",
-"visit_concept_id",
-"visit_start_date",
-"visit_start_datetime",
-"visit_end_date",
-"visit_end_datetime",
-"visit_type_concept_id",
-"provider_id",
-"care_site_id",
-"visit_source_value",
-"visit_source_concept_id",
-"admitted_from_concept_id",
-"admitted_from_source_value",
-"discharged_to_concept_id",
-"discharged_to_source_value",
-"preceding_visit_occurence_id",
+HOSPITALIZATION_COL_NAMES = [
+    "hospitalization_id",
+    "patient_id",
+    "admission_type_category",
+    "admission_dttm",
+    "discharge_dttm",
+    "admission_type_name",
+    "discharge_category",
+    "discharge_name",
+    "hospitalization_joined_id",
+    "zipcode_nine_digit",
+    "zipcode_five_digit",
+    "census_block_code",
+    "census_block_group_code",
+    "census_tract",
+    "state_code",
+    "county_code",
+    "age_at_admission",
 ]
 
 with open('config.json', 'r') as f:

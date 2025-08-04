@@ -6,17 +6,17 @@ from pathlib import Path
 import json
 
 PATIENT_COL_NAMES = [
-"patient_id",
-"race_name",
-"ethnicity_name",
-"sex_name",
-"death_dttm",
-"language_name",
-"language_category",
-"sex_cetegory",
-"birth_date",
-"race_category",
-"ethnicity_category",
+    "patient_id",
+    "sex_cetegory",
+    "birth_date",
+    "race_category",
+    "ethnicity_category",
+    "sex_name",
+    "race_name",
+    "ethnicity_name",
+    "death_dttm",
+    "language_category",
+    "language_name",
 ]
 
 with open('config.json', 'r') as f:

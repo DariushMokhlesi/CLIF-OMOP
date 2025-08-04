@@ -5,6 +5,21 @@ from importlib import reload
 from pathlib import Path
 import json
 
+MEDICATION_ADMIN_CONTINUOUS_COL_NAMES = [
+    "med_category",
+    "admin_dttm",
+    "med_dose",
+    "hospitalization_id",
+    "med_name",
+    "med_route_name",
+    "med_dose_unit",
+    "med_order_id",
+    "med_group",
+    "med_route_category",
+    "mar_action_name",
+    "mar_action_category",
+]
+
 with open('config.json', 'r') as f:
     config = json.load(f)
 
