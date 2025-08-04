@@ -70,8 +70,7 @@ def remove_columns_measurement():
         'unit_source_concept_id', 
         'value_source_value', 
         'measurement_event_id', 
-        'meas_event_field_concept_id'
-        'unit_concept_id'])
+        'meas_event_field_concept_id'])
         print(measurement_df.head())
     except Exception as e:
         print(f"Error processing file: {e}")
