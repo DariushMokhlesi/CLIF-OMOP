@@ -48,7 +48,21 @@ def rename_medication_admin_continuous():
 def remove_columns_medication_admin_continuous():
     try:
         medication_df = pd.read_parquet(file_path)
-        medication_df = medication_df.drop(columns=['drug_exposure_id', 'person_id', 'drug_exposure_start_date', 'drug_exposure_end_date', 'drug_exposure_end_datetime', 'verbatim_end_date', 'drug_type_concept_id', 'stop_reason', 'refills', 'days_supply', 'sig', 'route_concept_id', 'lot_number', 'provider_id', 'visit_detail_id'])
+        medication_df = medication_df.drop(columns=['drug_exposure_id', 
+        'person_id', 
+        'drug_exposure_start_date', 
+        'drug_exposure_end_date', 
+        'drug_exposure_end_datetime', 
+        'verbatim_end_date', 
+        'drug_type_concept_id', 
+        'stop_reason', 
+        'refills', 
+        'days_supply', 
+        'sig', 
+        'route_concept_id', 
+        'lot_number', 
+        'provider_id', 
+        'visit_detail_id'])
         print(medication_df.head())
     except Exception as e:
         print(f"Error processing file: {e}")
@@ -56,27 +70,18 @@ def remove_columns_medication_admin_continuous():
 def adding_columns_medication_admin_continuous():
     try:
         medication_df = pd.read_parquet(file_path)
-        medication_df = medication_df.assign(drug_exposure_id=None, 
-        person_id=None, 
-        drug_exposure_start_date = None,
-        drug_exposure_end_date = None,
-        drug_exposure_end_datetime = None,
-        verbatim_end_date = None,
-        drug_type_concept_id=None,
-        stop_reason=None, 
-        refills=None, 
-        days_supply=None,
-        sig=None,
-        route_concept_id=None,
-        lot_number=None,
-        provider_id=None,
-        visit_detail_id=None)
+        medication_df = medication_df.assign(med_order_id=None, 
+        med_group=None, 
+        med_route_category = None,
+        mar_action_name = None,
+        mar_action_category = None)
+        print(medication_df.head())
+        medication_df.to_parquet(output_file, index=False)
     except Exception as e:
         print(f"Error processing file: {e}")
 
 
-
 if __name__ == "__main__":
     rename_medication_admin_continuous()
-    adding_columns_drug_exposure()
-
+    remove_columns_medication_admin_continuous()
+    adding_columns_medication_admin_continuous()
