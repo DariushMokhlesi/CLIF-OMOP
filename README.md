@@ -5,7 +5,7 @@ This repository provides code that converts healthcare data from OMOP to CLIF an
 Before running any of the scripts, please specify the local file paths for the 'clif_parquet_dir' and 'omop_parquet_dir' in the config.json file. Please ensure that you use a parquet file. 
 
 # Authors
-Dariush Mokhlesi (GitHub: DariushMokhlesi) and Kian Mokhlesi (GitHub: KianMokhlesi)
+Dariush Mokhlesi (GitHub: DariushMokhlesi) and Kian Mokhlesi (GitHub: KianMokhlesi). 
 
 # Note
 This repository converts several Omop tables (person, visit_occurence, measurement, and drug_exposure) to their corresponding CLIF tables (patient, hospitalization, vitals, medication_admin_continuous) and vice versa. After each file is run, it creates its converted corresponding parquet file.
