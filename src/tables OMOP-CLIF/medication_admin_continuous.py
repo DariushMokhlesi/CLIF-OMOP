@@ -1,23 +1,16 @@
 # src/drug_exposure.py
 import numpy as np
 import pandas as pd
-import duckdb
-import logging
 from importlib import reload
 from pathlib import Path
 import json
 
-DRUG_EXPOSURE_COL_NAMES = [
-]
-
 with open('config.json', 'r') as f:
     config = json.load(f)
-
 
 omop_parquet_dir = config["omop_parquet_dir"]
 file_path = Path(omop_parquet_dir) / "omop_drug_exposure.parquet"
 output_file = Path(omop_parquet_dir) / "clif_medication_admin_continuous.parquet"
-
 
 def rename_medication_admin_continuous():
     try:
@@ -35,14 +28,11 @@ def rename_medication_admin_continuous():
         mapping = dict(zip(df["Concept ID"], df["med_category"]))
         print(type(medication_df["med_category"]))
         print(medication_df["med_category"].head())
-        #medication_df["med_category"] = medication_df["med_category"].map(mapping)
         medication_df["med_category"] = medication_df["med_category"].apply(
-    lambda x: mapping.get(x, x)
-)
+    lambda x: mapping.get(x, x))
         print(medication_df["med_category"].unique())
-
     except Exception as e:
-        print(f"Error processing file: {e}")
+        print(f"Error renaming to medication_admin_continuous file: {e}")
 
  
 def remove_columns_medication_admin_continuous():
@@ -65,7 +55,7 @@ def remove_columns_medication_admin_continuous():
         'visit_detail_id'])
         print(medication_df.head())
     except Exception as e:
-        print(f"Error processing file: {e}")
+        print(f"Error removing columns to medication_admin_continuous file: {e}")
 
 def adding_columns_medication_admin_continuous():
     try:
@@ -78,8 +68,7 @@ def adding_columns_medication_admin_continuous():
         print(medication_df.head())
         medication_df.to_parquet(output_file, index=False)
     except Exception as e:
-        print(f"Error processing file: {e}")
-
+        print(f"Error adding columns to medication_admin_continuous file: {e}")
 
 if __name__ == "__main__":
     rename_medication_admin_continuous()

@@ -1,8 +1,6 @@
 # src/person.py
 import numpy as np
 import pandas as pd
-import duckdb
-import logging
 from importlib import reload
 from pathlib import Path
 import json
@@ -35,7 +33,6 @@ clif_parquet_dir = config["clif_parquet_dir"]
 file_path = Path(clif_parquet_dir) / "clif_patient.parquet"
 output_file = Path(clif_parquet_dir) / "omop_person.parquet"
 
-
 def rename_person():
     try:
         patient_df = pd.read_parquet(file_path)
@@ -47,13 +44,9 @@ def rename_person():
         patient_df = patient_df.rename(columns={'sex_name': 'gender_source_value'})    
         patient_df = patient_df.rename(columns={'race_name': 'race_source_value'})    
         patient_df = patient_df.rename(columns={'ethnicity_name': 'ethnicity_source_value'})    
-          
         print(patient_df.head())
     except Exception as e:
-        print(f"Error processing file: {e}")
-
-
-
+        print(f"Error renaming to person file: {e}")
 
 def remove_columns_person():
     try:
@@ -61,19 +54,22 @@ def remove_columns_person():
         patient_df = patient_df.drop(columns=['death_dttm', 'language_category', 'language_name'])
         print(patient_df.head())
     except Exception as e:
-        print(f"Error processing file: {e}")
-
+        print(f"Error removing columns to person file: {e}")
 
 def adding_columns_person():
     try:
         patient_df = pd.read_parquet(file_path)
-        patient_df = patient_df.assign(location_id=None, provider_id=None, care_site_id=None, person_source_value=None, gender_source_concept_id=None, race_source_concept_id=None, ethnicity_source_concept_id=None)
-        print(patient_df.head())
+        patient_df = patient_df.assign(location_id=None, 
+        provider_id=None, 
+        care_site_id=None, 
+        person_source_value=None, 
+        gender_source_concept_id=None, 
+        race_source_concept_id=None, 
+        ethnicity_source_concept_id=None)
         patient_df.to_parquet(output_file, index=False)
-        
+        print(patient_df.head())
     except Exception as e:
-        print(f"Error processing file: {e}")
-
+        print(f"Error adding columns to person file: {e}")
 
 if __name__ == "__main__":
     rename_person()

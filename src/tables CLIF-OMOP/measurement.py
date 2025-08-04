@@ -1,8 +1,6 @@
 # src/measurement.py
 import numpy as np
 import pandas as pd
-import duckdb
-import logging
 from importlib import reload
 from pathlib import Path
 import json
@@ -40,7 +38,6 @@ clif_parquet_dir = config["clif_parquet_dir"]
 file_path = Path(clif_parquet_dir) / "clif_vitals.parquet"
 output_file = Path(clif_parquet_dir) / "omop_measurement.parquet"
 
-
 def rename_measurement():
     try:
         vitals_df = pd.read_parquet(file_path)
@@ -52,22 +49,35 @@ def rename_measurement():
         vitals_df = vitals_df.rename(columns={'meas_site_name': 'value_as_concept_Id'})        
         #vitals_df = vitals_df.rename(columns={'vital_category': 'unit_concept_id'})  
         vitals_df = vitals_df.rename(columns={'hospitalization_id': 'visit_occurence_id'})            
-        vitals_df = vitals_df.rename(columns={'vital_name': 'measurement_source_value'})            
-          
+        vitals_df = vitals_df.rename(columns={'vital_name': 'measurement_source_value'})                    
         print(vitals_df.head())
     except Exception as e:
-        print(f"Error processing file: {e}")
+        print(f"Error renaming to measurement file: {e}")
 
 def adding_columns_measurement():
     try:
         vitals_df = pd.read_parquet(file_path)
-        vitals_df = vitals_df.assign(measurement_id=None, person_id=None, measurement_date=None, measurement_time=None, measurement_type_concept_id=None, operator_concept_id=None, range_low=None, range_high=None, provider_id=None, visit_detail_id=None, measurement_source_concept_id=None, unit_source_value=None, unit_source_concept_id=None, value_source_value=None, measurement_event_id=None, meas_event_field_concept_id=None)
-        print(vitals_df.head())
+        vitals_df = vitals_df.assign(measurement_id=None, 
+        person_id=None, 
+        measurement_date=None, 
+        measurement_time=None, 
+        measurement_type_concept_id=None, 
+        operator_concept_id=None, 
+        range_low=None, 
+        range_high=None, 
+        provider_id=None, 
+        visit_detail_id=None, 
+        measurement_source_concept_id=None, 
+        unit_source_value=None, 
+        unit_source_concept_id=None, 
+        value_source_value=None, 
+        measurement_event_id=None, 
+        meas_event_field_concept_id=None)
         vitals_df.to_parquet(output_file, index=False)
+        print(vitals_df.head())
     except Exception as e:
-        print(f"Error processing file: {e}")
+        print(f"Error adding columns to measurement file: {e}")
 
 if __name__ == "__main__":
     rename_measurement()
     adding_columns_measurement()
-

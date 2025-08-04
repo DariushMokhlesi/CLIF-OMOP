@@ -1,8 +1,6 @@
 # src/visit_occurence.py
 import numpy as np
 import pandas as pd
-import duckdb
-import logging
 from importlib import reload
 from pathlib import Path
 import json
@@ -34,8 +32,7 @@ omop_parquet_dir = config["omop_parquet_dir"]
 file_path = Path(omop_parquet_dir) / "omop_visit_occurrence.parquet"
 output_file = Path(omop_parquet_dir) / "clif_hospitalization.parquet"
 
-
-def rename_person():
+def rename_hospitalization():
     try:
         hospitalization_df = pd.read_parquet(file_path)
         hospitalization_df = hospitalization_df.rename(columns={'visit_occurence_id': 'hospitalization_id'})       
@@ -48,18 +45,17 @@ def rename_person():
         hospitalization_df = hospitalization_df.rename(columns={'discharged_to_source_value': 'discharge_name'})            
         print(hospitalization_df.head())
     except Exception as e:
-        print(f"Error processing file: {e}")
+        print(f"Error renaming columns to hospitalization file: {e}")
 
-def remove_columns_hospital():
+def remove_columns_hospitalization():
     try:
         hospitalization_df = pd.read_parquet(file_path)
         hospitalization_df = hospitalization_df.drop(columns=['preceding_visit_occurence_id'])
         print(hospitalization_df.head())
     except Exception as e:
-        print(f"Error processing file: {e}")
+        print(f"Error removing columns to hospitalization file: {e}")
 
-
-def adding_columns_hospital():
+def adding_columns_hospitalization():
     try:
         hospitalization_df = pd.read_parquet(file_path)
         hospitalization_df = hospitalization_df.assign(visit_start_date=None, 
@@ -84,10 +80,9 @@ def adding_columns_hospital():
         hospitalization_df.to_parquet(output_file, index=False)
 
     except Exception as e:
-        print(f"Error processing file: {e}")
-
+        print(f"Error adding columns to hospitalization file: {e}")
 
 if __name__ == "__main__":
-    rename_person()
-    remove_columns_hospital()
-    adding_columns_hospital()
+    rename_hospitalization()
+    remove_columns_hospitalization()
+    adding_columns_hospitalization()

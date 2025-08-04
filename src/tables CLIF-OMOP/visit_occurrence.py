@@ -34,8 +34,7 @@ clif_parquet_dir = config["clif_parquet_dir"]
 file_path = Path(clif_parquet_dir) / "clif_hospitalization.parquet"
 output_file = Path(clif_parquet_dir) / "omop_visit_occurrence.parquet"
 
-
-def rename_person():
+def rename_visit_occurrence():
     try:
         hospitalization_df = pd.read_parquet(file_path)
         hospitalization_df = hospitalization_df.rename(columns={'hospitalization_id': 'visit_occurence_id'})       
@@ -51,27 +50,31 @@ def rename_person():
         hospitalization_df = hospitalization_df.rename(columns={'discharge_name': 'discharged_to_source_value'})               
         print(hospitalization_df.head())
     except Exception as e:
-        print(f"Error processing file: {e}")
-def adding_columns_hospital():
-    try:
-        hospitalization_df = pd.read_parquet(file_path)
-        hospitalization_df = hospitalization_df.assign(visit_type_concept_id=None, provider_id=None, care_site_id=None, visit_source_concept_id=None, admitted_from_concept_id=None, preceding_visit_occurence_id=None)
-        print(hospitalization_df.head())
-        hospitalization_df.to_parquet(output_file, index=False)
+        print(f"Error renaming to visit_occurrence file: {e}")
 
-    except Exception as e:
-        print(f"Error processing file: {e}")
-
-def remove_columns_hospital():
+def remove_columns_visit_occurrence():
     try:
         hospitalization_df = pd.read_parquet(file_path)
         hospitalization_df = hospitalization_df.drop(columns=['hospitalization_joined_id', 'zipcode_nine_digit', 'zipcode_five_digit' , 'census_block_code', 'census_block_group_code', 'census_tract', 'state_code', 'state_code', 'county_code', 'age_at_admission'])
         print(hospitalization_df.head())
     except Exception as e:
-        print(f"Error processing file: {e}")
+        print(f"Error removing columns to visit_occurrence file: {e}")
 
+def adding_columns_visit_occurrence():
+    try:
+        hospitalization_df = pd.read_parquet(file_path)
+        hospitalization_df = hospitalization_df.assign(visit_type_concept_id=None, 
+        provider_id=None, 
+        care_site_id=None, 
+        visit_source_concept_id=None, 
+        admitted_from_concept_id=None, 
+        preceding_visit_occurence_id=None)
+        hospitalization_df.to_parquet(output_file, index=False)
+        print(hospitalization_df.head())
+    except Exception as e:
+        print(f"Error adding columns to visit_occurrence file: {e}")
 
 if __name__ == "__main__":
-    rename_person()
-    remove_columns_hospital()
-    adding_columns_hospital()
+    rename_visit_occurrence()
+    remove_columns_visit_occurrence()
+    adding_columns_visit_occurrence()

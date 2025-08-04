@@ -1,8 +1,6 @@
 # src/measurement.py
 import numpy as np
 import pandas as pd
-import duckdb
-import logging
 from importlib import reload
 from pathlib import Path
 import json
@@ -40,7 +38,7 @@ omop_parquet_dir = config["omop_parquet_dir"]
 file_path = Path(omop_parquet_dir) / "omop_measurement.parquet"
 output_file = Path(omop_parquet_dir) / "clif_vitals.parquet"
 
-def rename_measurement():
+def rename_vitals():
     try:
         measurement_df = pd.read_parquet(file_path)
         measurement_df = measurement_df.rename(columns={'measurement_concept_id': 'vital_category'})   
@@ -48,11 +46,12 @@ def rename_measurement():
         measurement_df = measurement_df.rename(columns={'value_as_concept_id': 'meas_site_name'})        
         measurement_df = measurement_df.rename(columns={'visit_occurence_id': 'hospitalization_id'})        
         measurement_df = measurement_df.rename(columns={'measurement_source_value': 'vital_name'})            
+        
         print(measurement_df.head())
     except Exception as e:
-        print(f"Error processing file: {e}")
+        print(f"Error renaming to vitals file: {e}")
 
-def remove_columns_measurement():
+def remove_columns_vitals():
     try:
         measurement_df = pd.read_parquet(file_path)
         measurement_df = measurement_df.drop(columns=['measurement_id', 
@@ -73,10 +72,10 @@ def remove_columns_measurement():
         'meas_event_field_concept_id'])
         print(measurement_df.head())
     except Exception as e:
-        print(f"Error processing file: {e}")
+        print(f"Error removing columns to vitals file: {e}")
 
 
-def adding_columns_measurement():
+def adding_columns_vitals():
     try:
         measurement_df = pd.read_parquet(file_path)
         measurement_df = measurement_df.assign(measurement_id=None, 
@@ -94,11 +93,12 @@ def adding_columns_measurement():
         measurement_event_id=None, 
         meas_event_field_concept_id=None)
         print(measurement_df.head())
+
+        measurement_df.to_parquet(output_file, index=False)
     except Exception as e:
-        print(f"Error processing file: {e}")
+        print(f"Error adding columns to vitals file: {e}")
 
 if __name__ == "__main__":
-    rename_measurement()
-    remove_columns_measurement()
-    adding_columns_measurement()
-
+    rename_vitals()
+    remove_columns_vitals()
+    adding_columns_vitals()
