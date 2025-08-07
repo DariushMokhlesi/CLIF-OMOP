@@ -25,25 +25,30 @@ output_file = Path(omop_parquet_dir) / "clif_vitals.parquet"
 def rename_vitals():
     try:
         measurement_df = pd.read_parquet(file_path)
-        measurement_df = measurement_df.rename(columns={'measurement_concept_id': 'vital_category'})   
+        measurement_df = measurement_df.rename(columns={'measurement_concept_id': 'vital_category'}) 
+        measurement_df = measurement_df.rename(columns={'measurement_datetime': 'admission_dttm'})        
+  
         measurement_df = measurement_df.rename(columns={'value_as_number': 'vital_value'})        
         measurement_df = measurement_df.rename(columns={'value_as_concept_id': 'meas_site_name'})        
         measurement_df = measurement_df.rename(columns={'visit_occurence_id': 'hospitalization_id'})        
         measurement_df = measurement_df.rename(columns={'measurement_source_value': 'vital_name'})            
         
+        measurement_df['admission_dttm'] = pd.to_datetime(measurement_df['admission_dttm'], errors='coerce', utc=True)
+        measurement_df.to_parquet(output_file, index=False)
         print(measurement_df.head())
     except Exception as e:
         print(f"Error renaming to vitals file: {e}")
 
 def remove_columns_vitals():
     try:
-        measurement_df = pd.read_parquet(file_path)
+        measurement_df = pd.read_parquet(output_file)
         measurement_df = measurement_df.drop(columns=['measurement_id', 
         'person_id', 
         'measurement_date', 
         'measurement_time', 
         'measurement_type_concept_id', 
         'operator_concept_id', 
+        'unit_concept_id',
         'range_low', 
         'range_high', 
         'provider_id', 
@@ -54,6 +59,8 @@ def remove_columns_vitals():
         'value_source_value', 
         'measurement_event_id', 
         'meas_event_field_concept_id'])
+        measurement_df.to_parquet(output_file, index=False)
+
         print(measurement_df.head())
     except Exception as e:
         print(f"Error removing columns to vitals file: {e}")
@@ -61,7 +68,7 @@ def remove_columns_vitals():
 
 def adding_columns_vitals():
     try:
-        measurement_df = pd.read_parquet(file_path)
+        measurement_df = pd.read_parquet(output_file)
         measurement_df = measurement_df.assign(measurement_id=None, 
         person_id=None, 
         measurement_type_concept_id=None, 

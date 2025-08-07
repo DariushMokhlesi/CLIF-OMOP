@@ -42,27 +42,31 @@ def rename_measurement():
     try:
         vitals_df = pd.read_parquet(file_path)
         vitals_df = vitals_df.rename(columns={'vital_category': 'measurement_concept_id'})   
-        #vitals_df = vitals_df.rename(columns={'recorded_dttm': 'measurement_date'})         
         vitals_df = vitals_df.rename(columns={'recorded_dttm': 'measurement_datetime'})        
-        #vitals_df = vitals_df.rename(columns={'recorded_dttm': 'measurement_time'})        
         vitals_df = vitals_df.rename(columns={'vital_value': 'value_as_number'})        
         vitals_df = vitals_df.rename(columns={'meas_site_name': 'value_as_concept_Id'})        
-        #vitals_df = vitals_df.rename(columns={'vital_category': 'unit_concept_id'})  
         vitals_df = vitals_df.rename(columns={'hospitalization_id': 'visit_occurence_id'})            
-        vitals_df = vitals_df.rename(columns={'vital_name': 'measurement_source_value'})                    
+        vitals_df = vitals_df.rename(columns={'vital_name': 'measurement_source_value'})
+
+        vitals_df['measurement_datetime'] = pd.to_datetime(vitals_df['measurement_datetime'], errors='coerce', utc=True)
+        vitals_df["measurement_date"] = vitals_df["measurement_datetime"].dt.date
+        vitals_df["measurement_time"] = vitals_df["measurement_datetime"].dt.time
+
+        vitals_df.to_parquet(output_file, index=False)
         print(vitals_df.head())
     except Exception as e:
         print(f"Error renaming to measurement file: {e}")
 
 def adding_columns_measurement():
     try:
-        vitals_df = pd.read_parquet(file_path)
+        vitals_df = pd.read_parquet(output_file)
         vitals_df = vitals_df.assign(measurement_id=None, 
         person_id=None, 
         measurement_date=None, 
         measurement_time=None, 
         measurement_type_concept_id=None, 
         operator_concept_id=None, 
+        unit_concept_id=None,
         range_low=None, 
         range_high=None, 
         provider_id=None, 
