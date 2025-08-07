@@ -30,13 +30,16 @@ def rename_patient():
     try:
         person_df = pd.read_parquet(file_path)
         person_df = person_df.rename(columns={'person_id': 'patient_id'})
-        person_df = person_df.rename(columns={'gender_concept_id': 'sex_cetegory'})        
-        person_df = person_df.rename(columns={'birth_datetime': 'birth_date'})        
-        person_df = person_df.rename(columns={'race_concept_id': 'race_category'})        
-        person_df = person_df.rename(columns={'ethnicity_concept_id': 'ethnicity_category'})             
-        person_df = person_df.rename(columns={'gender_source_value': 'sex_name'})   
-        person_df = person_df.rename(columns={'race_source_value': 'race_name'})             
-        person_df = person_df.rename(columns={'ethnicity_source_value': 'ethnicity_name'})             
+        person_df = person_df.rename(columns={'gender_concept_id': 'sex_cetegory'})
+        person_df = person_df.rename(columns={'birth_datetime': 'birth_date'})
+        person_df = person_df.rename(columns={'race_concept_id': 'race_category'})
+        person_df = person_df.rename(columns={'ethnicity_concept_id': 'ethnicity_category'})
+        person_df = person_df.rename(columns={'gender_source_value': 'sex_name'})
+        person_df = person_df.rename(columns={'race_source_value': 'race_name'})
+        person_df = person_df.rename(columns={'ethnicity_source_value': 'ethnicity_name'})
+        
+        person_df["birth_date"] = pd.to_datetime(person_df["birth_date"], errors='coerce').dt.date
+        person_df.to_parquet(output_file, index=False)
 
         print(person_df.head())
     except Exception as e:
@@ -44,7 +47,7 @@ def rename_patient():
 
 def remove_columns_patient():
     try:
-        person_df = pd.read_parquet(file_path)
+        person_df = pd.read_parquet(output_file)
         person_df = person_df.drop(columns=['year_of_birth', 
         'month_of_birth', 
         'day_of_birth', 
@@ -54,7 +57,8 @@ def remove_columns_patient():
         'person_source_value', 
         'gender_source_concept_id', 
         'race_source_concept_id', 
-        'ethnicity_source_concept_id'])        
+        'ethnicity_source_concept_id']) 
+        person_df.to_parquet(output_file, index=False)
         print(person_df.head())
     
     except Exception as e:
@@ -62,7 +66,7 @@ def remove_columns_patient():
 
 def adding_columns_patient():
     try:
-        person_df = pd.read_parquet(file_path)
+        person_df = pd.read_parquet(output_file)
         person_df = person_df.assign(death_dttm=None, 
         language_name=None, 
         language_category=None)

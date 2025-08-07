@@ -38,33 +38,33 @@ def rename_person():
         patient_df = pd.read_parquet(file_path)
         patient_df = patient_df.rename(columns={'patient_id': 'person_id'})    
         patient_df = patient_df.rename(columns={'sex_cetegory': 'gender_concept_id'})        
-        
         patient_df = patient_df.rename(columns={'birth_date': 'birth_datetime'})        
         patient_df = patient_df.rename(columns={'race_category': 'race_concept_id'})        
         patient_df = patient_df.rename(columns={'ethnicity_category': 'ethnicity_concept_id'})      
         patient_df = patient_df.rename(columns={'sex_name': 'gender_source_value'})    
         patient_df = patient_df.rename(columns={'race_name': 'race_source_value'})    
-        patient_df = patient_df.rename(columns={'ethnicity_name': 'ethnicity_source_value'})    
-
-        patient_df['birth_datetime'] = pd.to_datetime(patient_df['birth_datetime'], errors='coerce').dt.normalize()
+        patient_df = patient_df.rename(columns={'ethnicity_name': 'ethnicity_source_value'})
+        patient_df['birth_datetime'] = pd.to_datetime(patient_df['birth_datetime'], errors='coerce', utc=True).dt.normalize()
         patient_df['year_of_birth'] = patient_df['birth_datetime'].dt.year
         patient_df['month_of_birth'] = patient_df['birth_datetime'].dt.month
         patient_df['day_of_birth'] = patient_df['birth_datetime'].dt.day
+        patient_df.to_parquet(output_file, index=False)
         print(patient_df.head())
     except Exception as e:
         print(f"Error renaming to person file: {e}")
 
 def remove_columns_person():
     try:
-        patient_df = pd.read_parquet(file_path)
+        patient_df = pd.read_parquet(output_file)
         patient_df = patient_df.drop(columns=['death_dttm', 'language_category', 'language_name'])
+        patient_df.to_parquet(output_file, index=False)
         print(patient_df.head())
     except Exception as e:
         print(f"Error removing columns to person file: {e}")
 
 def adding_columns_person():
     try:
-        patient_df = pd.read_parquet(file_path)
+        patient_df = pd.read_parquet(output_file)
         patient_df = patient_df.assign(location_id=None, 
         provider_id=None, 
         care_site_id=None, 
