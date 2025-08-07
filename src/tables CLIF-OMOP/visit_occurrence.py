@@ -48,6 +48,11 @@ def rename_visit_occurrence():
         hospitalization_df = hospitalization_df.rename(columns={'admission_type_name': 'admitted_from_source_value'})       
         hospitalization_df = hospitalization_df.rename(columns={'discharge_category': 'discharged_to_concept_id'})       
         hospitalization_df = hospitalization_df.rename(columns={'discharge_name': 'discharged_to_source_value'})               
+        
+        hospitalization_df['visit_start_datetime'] = pd.to_datetime(hospitalization_df['visit_start_datetime'], errors='coerce', utc=True)
+        hospitalization_df["visit_start_date"] = hospitalization_df["visit_start_datetime"].dt.date
+        hospitalization_df['visit_end_datetime'] = pd.to_datetime(hospitalization_df['visit_end_datetime'], errors='coerce', utc=True)
+        hospitalization_df["visit_end_date"] = hospitalization_df["visit_end_datetime"].dt.date
         print(hospitalization_df.head())
     except Exception as e:
         print(f"Error renaming to visit_occurrence file: {e}")
