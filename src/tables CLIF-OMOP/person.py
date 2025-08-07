@@ -38,12 +38,18 @@ def rename_person():
         patient_df = pd.read_parquet(file_path)
         patient_df = patient_df.rename(columns={'patient_id': 'person_id'})    
         patient_df = patient_df.rename(columns={'sex_cetegory': 'gender_concept_id'})        
-        patient_df = patient_df.rename(columns={'birth_date': 'year_of_birth'})        
+        
+        patient_df = patient_df.rename(columns={'birth_date': 'birth_datetime'})        
         patient_df = patient_df.rename(columns={'race_category': 'race_concept_id'})        
         patient_df = patient_df.rename(columns={'ethnicity_category': 'ethnicity_concept_id'})      
         patient_df = patient_df.rename(columns={'sex_name': 'gender_source_value'})    
         patient_df = patient_df.rename(columns={'race_name': 'race_source_value'})    
         patient_df = patient_df.rename(columns={'ethnicity_name': 'ethnicity_source_value'})    
+
+        patient_df['birth_datetime'] = pd.to_datetime(patient_df['birth_datetime'], errors='coerce').dt.normalize()
+        patient_df['year_of_birth'] = patient_df['birth_datetime'].dt.year
+        patient_df['month_of_birth'] = patient_df['birth_datetime'].dt.month
+        patient_df['day_of_birth'] = patient_df['birth_datetime'].dt.day
         print(patient_df.head())
     except Exception as e:
         print(f"Error renaming to person file: {e}")
