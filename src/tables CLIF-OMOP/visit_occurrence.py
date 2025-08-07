@@ -53,21 +53,23 @@ def rename_visit_occurrence():
         hospitalization_df["visit_start_date"] = hospitalization_df["visit_start_datetime"].dt.date
         hospitalization_df['visit_end_datetime'] = pd.to_datetime(hospitalization_df['visit_end_datetime'], errors='coerce', utc=True)
         hospitalization_df["visit_end_date"] = hospitalization_df["visit_end_datetime"].dt.date
+        hospitalization_df.to_parquet(output_file, index=False)
         print(hospitalization_df.head())
     except Exception as e:
         print(f"Error renaming to visit_occurrence file: {e}")
 
 def remove_columns_visit_occurrence():
     try:
-        hospitalization_df = pd.read_parquet(file_path)
+        hospitalization_df = pd.read_parquet(output_file)
         hospitalization_df = hospitalization_df.drop(columns=['hospitalization_joined_id', 'zipcode_nine_digit', 'zipcode_five_digit' , 'census_block_code', 'census_block_group_code', 'census_tract', 'state_code', 'state_code', 'county_code', 'age_at_admission'])
+        hospitalization_df.to_parquet(output_file, index=False)
         print(hospitalization_df.head())
     except Exception as e:
         print(f"Error removing columns to visit_occurrence file: {e}")
 
 def adding_columns_visit_occurrence():
     try:
-        hospitalization_df = pd.read_parquet(file_path)
+        hospitalization_df = pd.read_parquet(output_file)
         hospitalization_df = hospitalization_df.assign(visit_type_concept_id=None, 
         provider_id=None, 
         care_site_id=None, 

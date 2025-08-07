@@ -43,31 +43,34 @@ def rename_hospitalization():
         hospitalization_df = hospitalization_df.rename(columns={'visit_source_value': 'admission_type_name'})       
         hospitalization_df = hospitalization_df.rename(columns={'discharged_to_concept_id': 'discharge_category'})       
         hospitalization_df = hospitalization_df.rename(columns={'discharged_to_source_value': 'discharge_name'})            
+        hospitalization_df['admission_dttm'] = pd.to_datetime(hospitalization_df['admission_dttm'], errors='coerce', utc=True)
+        hospitalization_df['discharge_dttm'] = pd.to_datetime(hospitalization_df['discharge_dttm'], errors='coerce', utc=True)
+        hospitalization_df.to_parquet(output_file, index=False)
         print(hospitalization_df.head())
     except Exception as e:
         print(f"Error renaming columns to hospitalization file: {e}")
 
 def remove_columns_hospitalization():
     try:
-        hospitalization_df = pd.read_parquet(file_path)
-        hospitalization_df = hospitalization_df.drop(columns=['preceding_visit_occurence_id'])
+        hospitalization_df = pd.read_parquet(output_file)
+        hospitalization_df = hospitalization_df.drop(columns=['visit_type_concept_id',
+         'provider_id',
+         'care_site_id',
+         'visit_source_concept_id',
+         'admitted_from_concept_id',
+         'preceding_visit_occurence_id',
+         'visit_start_date',
+         'visit_end_date',
+         ])
+        hospitalization_df.to_parquet(output_file, index=False)
         print(hospitalization_df.head())
     except Exception as e:
         print(f"Error removing columns to hospitalization file: {e}")
 
 def adding_columns_hospitalization():
     try:
-        hospitalization_df = pd.read_parquet(file_path)
-        hospitalization_df = hospitalization_df.assign(visit_start_date=None, 
-        visit_end_date=None, 
-        visit_type_concept_id=None, 
-        provider_id=None, 
-        care_site_id=None, 
-        visit_source_concept_id=None, 
-        admitted_from_concept_id=None, 
-        admitted_from_source_value=None,
-        preceding_visit_occurence_id=None,
-        hospitalization_joined_id=None,
+        hospitalization_df = pd.read_parquet(output_file)
+        hospitalization_df = hospitalization_df.assign(hospitalization_joined_id=None,
         zipcode_nine_digit=None,
         zipcode_five_digit=None,
         census_block_code=None,
