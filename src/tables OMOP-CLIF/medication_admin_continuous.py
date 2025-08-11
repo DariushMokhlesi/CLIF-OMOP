@@ -37,7 +37,8 @@ def rename_medication_admin_continuous():
         medication_df = medication_df.rename(columns={'drug_source_value': 'med_name'})  
         medication_df = medication_df.rename(columns={'route_source_value': 'med_route_name'})  
         medication_df = medication_df.rename(columns={'dose_unit_source_value': 'med_dose_unit'})  
-        
+        medication_df['admin_dttm'] = pd.to_datetime(medication_df['admin_dttm'], errors='coerce', utc=True)
+
         df = pd.read_csv("MappingMedicationConceptID.csv")
         df['med_category'] = df['med_category'].str.lower().str.strip()
         mapping = dict(zip(df["Concept ID"], df["med_category"]))
@@ -46,13 +47,14 @@ def rename_medication_admin_continuous():
         medication_df["med_category"] = medication_df["med_category"].apply(
     lambda x: mapping.get(x, x))
         print(medication_df["med_category"].unique())
+        medication_df.to_parquet(output_file, index=False)
     except Exception as e:
         print(f"Error renaming to medication_admin_continuous file: {e}")
 
  
 def remove_columns_medication_admin_continuous():
     try:
-        medication_df = pd.read_parquet(file_path)
+        medication_df = pd.read_parquet(output_file)
         medication_df = medication_df.drop(columns=['drug_exposure_id', 
         'person_id', 
         'drug_exposure_start_date', 
@@ -67,14 +69,17 @@ def remove_columns_medication_admin_continuous():
         'route_concept_id', 
         'lot_number', 
         'provider_id', 
-        'visit_detail_id'])
+        'visit_detail_id',
+        'drug_source_concept_id',
+        ])
+        medication_df.to_parquet(output_file, index=False)
         print(medication_df.head())
     except Exception as e:
         print(f"Error removing columns to medication_admin_continuous file: {e}")
 
 def adding_columns_medication_admin_continuous():
     try:
-        medication_df = pd.read_parquet(file_path)
+        medication_df = pd.read_parquet(output_file)
         medication_df = medication_df.assign(med_order_id=None, 
         med_group=None, 
         med_route_category = None,

@@ -93,8 +93,9 @@ def adding_columns_drug_exposure():
         route_concept_id=None,
         lot_number=None,
         provider_id=None,
-        visit_detail_id=None)
-
+        visit_detail_id=None,
+        drug_source_concept_id=None,
+        )
         drug_df.to_parquet(output_file, index=False)
         print(drug_df.head())
     except Exception as e:
